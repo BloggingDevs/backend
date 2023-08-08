@@ -8,9 +8,10 @@ const cors = require("cors");
 const port = process.env.PORT || 5001;
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
-//ROUTES
+/*==============    ROUTES    ==================*/
 app.get("/", (req, res) => {
   res.send("<h1>GodwinEgo Welcomes you to our blog backend</h1>");
 });
