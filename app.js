@@ -10,8 +10,9 @@ const port = process.env.PORT || 5001;
 const app = express();
 app.use(express.json());
 
+//ROUTES
 app.get("/", (req, res) => {
-  res.send({ message: "WELCOME TO OUR BLOG BACKEND" });
+  res.send("<h1>GodwinEgo Welcomes you to our blog backend</h1>");
 });
 
 app.listen(port, () => {
