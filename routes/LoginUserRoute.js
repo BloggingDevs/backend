@@ -14,9 +14,11 @@ const LoginUserRoute = async (req, res) => {
       return res.staus(401).json({ error: "Invalid Password" });
     }
     const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY);
-    return res.staus(201).json({ message: "Login Successful", token });
+    return res.status(201).json({ message: "Login Successful", token });
   } catch (error) {
     return res.staus(401).json({ error: "Login Failed" });
-    console.log(error);
+    console.log(`Login error ${error}`);
   }
 };
+
+module.exports = LoginUserRoute;

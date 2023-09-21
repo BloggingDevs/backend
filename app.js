@@ -5,6 +5,8 @@ const cors = require("cors");
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const RegisterUserRoute = require("./routes/RegisterUserRoute");
+const LoginUserRoute = require("./routes/LoginUserRoute");
+const AuthenticatedUser = require("./middleware/AuthenticatedUser");
 
 const app = express();
 app.use(express.json());
@@ -31,6 +33,13 @@ app.get("/", (req, res) => {
 //USER REGISTRATION
 app.post("/register", RegisterUserRoute);
 
+//USER LOGIN
+app.post("/login", LoginUserRoute);
+
+//PROTECTED ROUTES
+app.post("/protected", AuthenticatedUser, (req, res) => {
+  res.status(201).json({ message: "You've accessed a protected route" });
+});
 app.listen(port, () => {
   console.log(`Server is Running on ${port}`);
 });
