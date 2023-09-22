@@ -2,11 +2,9 @@ const express = require("express");
 const dotenv = require("dotenv");
 dotenv.config();
 const cors = require("cors");
-const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
-const RegisterUserRoute = require("./routes/RegisterUserRoute");
-const LoginUserRoute = require("./routes/LoginUserRoute");
 const AuthenticatedUser = require("./middleware/AuthenticatedUser");
+const authRoutes = require("./routes/Auth");
 
 const app = express();
 app.use(express.json());
@@ -29,13 +27,7 @@ mongoose
 app.get("/", (req, res) => {
   res.status(201).json({ message: "Let's Start The backend" });
 });
-
-//USER REGISTRATION
-app.post("/register", RegisterUserRoute);
-
-//USER LOGIN
-app.post("/login", LoginUserRoute);
-
+app.use("/auth", authRoutes);
 //PROTECTED ROUTES
 app.get("/protected", AuthenticatedUser, (req, res) => {
   res.status(201).json({ message: "You've accessed a protected route" });

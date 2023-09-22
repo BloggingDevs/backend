@@ -49,10 +49,14 @@ router.post("/login", async (req, res) => {
     if (!passwordMatch) {
       return res.status(401).json({ error: "Invalid Password" });
     }
-    const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY);
+    const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY, {
+      expiresIn: "30m", // Token expires in 30 minutes
+    });
     return res.status(201).json({ message: "Login Successful", token });
   } catch (error) {
     console.log(`Login error ${error}`);
     return res.status(401).json({ error: "Login Failed" });
   }
 });
+
+module.exports = router;

@@ -19,7 +19,9 @@ const AuthenticatedUser = async (req, res, next) => {
     // if (!token.value) {
     //   return res.status(401).json({ error: "Incorrect token provided" });
     // }
-    const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
+    const decodedToken = jwt.verify(token, process.env.SECRET_KEY, {
+      expiresIn: "30m",
+    });
     req.userData = { userId: decodedToken.userId };
     next();
   } catch (error) {
