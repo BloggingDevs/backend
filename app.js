@@ -3,8 +3,8 @@ const dotenv = require("dotenv");
 dotenv.config();
 const cors = require("cors");
 const mongoose = require("mongoose");
-const AuthenticatedUser = require("./middleware/AuthenticatedUser");
-const authRoutes = require("./routes/Auth");
+const AuthenticatedUser = require("./middleware/AuthenticatedUser.js");
+const authRoutes = require("./routes/Auth.js");
 
 const app = express();
 app.use(express.json());
