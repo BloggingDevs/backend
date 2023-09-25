@@ -21,7 +21,7 @@ mongoose
     console.log("Connected to MongoDB");
   })
   .catch((error) => {
-    console.log("Error connectiong to database: ", error);
+    console.log("Error connecting to database: ", error);
   });
 
 app.get("/", (req, res) => {
