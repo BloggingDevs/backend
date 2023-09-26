@@ -7,7 +7,7 @@ const User = require("../models/User");
 //USER REGISTRATION
 router.post("/register", async (req, res) => {
   try {
-    const { email, username, password, lastName, firstName } = req.body;
+    const { email, username, password } = req.body;
     //check if username exists
     const checkExistingUserName = await User.findOne({ username });
     if (checkExistingUserName) {
@@ -26,8 +26,6 @@ router.post("/register", async (req, res) => {
       username,
       password: hashedPassword,
       email,
-      firstName,
-      lastName,
     });
     await user.save();
     res.status(200).json({ message: "User Registered Successfully" });
