@@ -13,7 +13,7 @@ router.post("/register", async (req, res) => {
     if (checkExistingUserName) {
       return res
         .status(401)
-        .json({ message: "Username already exists, Pick another one" });
+        .json({ message: "Username Already Exists, Try Another One" });
     }
     const checkExistingEmail = await User.findOne({ email });
     if (checkExistingEmail) {
@@ -30,7 +30,6 @@ router.post("/register", async (req, res) => {
     await user.save();
     res.status(200).json({ message: "User Registered Successfully" });
   } catch (error) {
-    console.log("Failed To Register User", error);
     res.status(401).json({ error: "Failed To Register User" });
   }
 });
@@ -48,11 +47,10 @@ router.post("/login", async (req, res) => {
       return res.status(401).json({ error: "Invalid Password" });
     }
     const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY, {
-      expiresIn: "30m", // Token expires in 30 minutes
+      expiresIn: "1h", // Token expires in 1 hour
     });
     return res.status(201).json({ message: "Login Successful", token });
   } catch (error) {
-    console.log(`Login error ${error}`);
     return res.status(401).json({ error: "Login Failed" });
   }
 });
